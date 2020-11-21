@@ -1,0 +1,10 @@
+{
+    "name": "porabote/core",
+    "description": "Porabote skeleton app",
+    "homepage": "https://porabote.com",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3"
+    }
+}
