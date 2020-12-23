@@ -1,7 +1,7 @@
 {
     "name": "porabote/core",
-    "description": "Porabote skeleton app",
-    "homepage": "https://porabote.com",
+    "description": "Porabote core",
+    "homepage": "https://porabote.ru",
     "type": "project",
     "license": "MIT",
     "require": {
