@@ -1,0 +1,10 @@
+{
+    "name": "porabote/core",
+    "description": "Porabote core",
+    "homepage": "https://porabote.ru",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3"
+    }
+}
