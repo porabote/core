@@ -130,6 +130,7 @@ class File
         return fclose($this->handle);
     }
 
+
     function newEntity($data = [])
     {
         $this->entity = [
@@ -157,7 +158,6 @@ class File
         }
 
         return $this->entity = array_merge($this->entity, $data);
-
 
     }
 
