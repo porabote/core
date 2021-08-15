@@ -12,7 +12,6 @@ namespace Porabote\Filesystem;
 
 use finfo;
 use SplFileInfo;
-use Cake\Http\Session;
 
 /**
  * Convenience class for reading, writing and appending to files.
@@ -60,6 +59,7 @@ class File
     public $entity;
 
     public $path;
+    private $storagePath = '';
     public $pwd;
     public $unzipRelativePath = 'tmp/unzip';
     public $unzipAbsolutePath;
@@ -83,13 +83,11 @@ class File
             $this->name = ltrim($splFileInfo->getFilename(), '/\\');
         }
         $create && $this->create();
-
-        $this->Session = new Session();
     }
 
     function create()
     {
-        $path = $this->path = $this->SplFileInfo->getPath() . DS . $this->name;
+        $path = $this->path = $this->SplFileInfo->getPath() . '/' . $this->name;
 
         if(!file_exists($path)) {
             $this->handle = fopen($path, "a");
@@ -130,15 +128,19 @@ class File
         return fclose($this->handle);
     }
 
+    function setStoragePath($path)
+    {
+        $this->storagePath = $path;
+    }
 
     function newEntity($data = [])
     {
         $this->entity = [
             'basename' => $this->SplFileInfo->getBasename(),
             'ext' => $this->SplFileInfo->getExtension(),
-            'uri' => str_replace(WWW_ROOT, '/', $this->SplFileInfo->getRealPath()),
+            'uri' => str_replace($this->storagePath, '', $this->SplFileInfo->getRealPath()),
             'path' => $this->SplFileInfo->getRealPath(),
-            'user_id' => $this->Session->read('Auth.User.id'),
+            'user_id' => null,
             'mime' => mime_content_type($this->SplFileInfo->getRealPath()),
             'token' => $this->createGuid(),
             'width' => '',
